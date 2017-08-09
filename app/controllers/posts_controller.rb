@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 	http_basic_authenticate_with name: 'alex', password: '1234', except: [:index, :show]
 	
 	def index
-		@posts = Post.all
+		@posts = Post.all.order("created_at DESC").paginate(page: params[:page], per_page: 3)
 	end
 
 	def show
